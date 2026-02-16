@@ -2,6 +2,8 @@ import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import challenges from "./data/challenges.json";
 
+const port = Number(process.env.PORT) || 3000;
+
 const app = new Elysia()
   .use(cors());
 
@@ -24,7 +26,6 @@ app.post("/api/submit", ({ body }) => {
   return { success: false };
 });
 
-app.listen(3000);
+app.listen(port);
 
-console.log("DXCTF backend running http://localhost:3000");
-
+console.log(`DXCTF backend running on port ${port}`);
