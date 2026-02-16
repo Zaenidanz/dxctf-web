@@ -57,7 +57,7 @@ e.preventDefault();
 
 const flag=document.getElementById("flagInput").value;
 
-const res=await fetch("http://localhost:3000/api/submit",{
+const res=await fetch("https://dxctf-web-production.up.railway.app/api/submit",{
 method:"POST",
 headers:{ "Content-Type":"application/json"},
 body:JSON.stringify({
