@@ -1,0 +1,48 @@
+[
+  {
+    "id": "linux1",
+    "title": "Linux Basic",
+    "flag": "dxctf{hidden_file_found}"
+  },
+    {
+    "id": "linux2",
+    "title": "Linux Strong",
+    "flag": "dxctf{permission_dibuka}"
+  },
+  {
+    "id": "linux3",
+    "title": "Linux Strong",
+    "flag": "dxctf{grep_adalah_senjata}"
+  },
+  {
+    "id": "foren1",
+    "title": "Suspicious Image1",
+    "flag": "dxctf{metadata_bocor}"
+  },
+    {
+    "id": "foren2",
+    "title": "Suspicious Image2",
+    "flag": "dxctf{png_ternyata_zip}"
+  },
+  {
+    "id": "foren3",
+    "title": "Suspicious Image3",
+    "flag": "dxctf{case_closed}"
+  },
+  {
+    "id": "crypto1",
+    "title": "Encrypted Message",
+    "flag": "dxctf{hidden_memo}"
+  },
+    {
+    "id": "crypto2",
+    "title": "Hidden Email",
+    "flag": "dxctf{hidden_email}"
+  },
+  {
+    "id": "crypto3",
+    "title": "Secret Note",
+    "flag": "dxctf{theres_a_secret_note}"
+  }
+]
+

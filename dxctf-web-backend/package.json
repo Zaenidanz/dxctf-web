@@ -1,0 +1,12 @@
+{
+  "name": "dxctf-web-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.1",
+    "elysia": "latest"
+  }
+}

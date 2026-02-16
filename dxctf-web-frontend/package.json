@@ -1,0 +1,14 @@
+{
+  "name": "dxctf-web-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun astro dev",
+    "build": "bun astro build",
+    "preview": "bun astro preview"
+  },
+  "dependencies": {
+    "astro": "^3.9.2"
+  }
+}
+

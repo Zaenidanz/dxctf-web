@@ -1,0 +1,91 @@
+---
+import "../../styles/case.css";
+---
+
+<div class="case-box">
+
+<h2>Suspicious Image 1</h2>
+<p>A suspicious image was recovered from the suspect’s device.
+Metadata analysis suggests the file was modified multiple times.
+Investigators believe additional data may be concealed within it.
+Sometimes the truth hides beneath the surface.</p>
+
+<a
+  href="https://drive.google.com/uc?export=download&id=1KXiwNMmzplkMkx-o5WzgAP3ILbVUBCoh"
+  class="download-btn"
+>
+  Download Evidence File
+</a>
+
+
+<form id="flagForm">
+  <input id="flagInput" placeholder="dxctf{...}" />
+  <button type="submit">VERIFY EVIDENCE</button>
+</form>
+
+<p id="result"></p>
+
+</div>
+<style>
+
+.download-btn{
+  display:inline-block;
+  margin:12px 0;
+  padding:10px 16px;
+  background:#2b2b2b;
+  color:#f5e6c8;
+  text-decoration:none;
+  font-weight:bold;
+  letter-spacing:1px;
+  border-radius:4px;
+  box-shadow:0 0 8px rgba(0,0,0,.6);
+  transition:.25s;
+}
+
+.download-btn:hover{
+  background:#3a3a3a;
+  transform:translateY(-2px);
+}
+
+</style>
+<script>
+const form=document.getElementById("flagForm");
+const result=document.getElementById("result");
+
+form.addEventListener("submit",async(e)=>{
+e.preventDefault();
+
+const flag=document.getElementById("flagInput").value;
+
+const res=await fetch("http://localhost:3000/api/submit",{
+method:"POST",
+headers:{ "Content-Type":"application/json"},
+body:JSON.stringify({
+challengeId:"foren1",
+flag
+})
+});
+
+const data=await res.json();
+
+if(data.success){
+
+  result.innerHTML="NEW EVIDENCE FOUND";
+  result.style.color="lime";
+
+  localStorage.setItem("foren1_solved","true");
+
+  document.body.classList.add("cinematic");
+
+  setTimeout(()=>{
+    window.location.replace("/");
+  },1200);
+
+}else{
+
+result.innerHTML="Access Denied";
+result.style.color="red";
+
+}
+});
+</script>

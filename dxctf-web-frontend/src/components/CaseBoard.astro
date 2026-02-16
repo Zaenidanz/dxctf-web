@@ -1,0 +1,570 @@
+---
+---
+<div class="board-wrapper">
+<div class="board">
+
+<div class="brand-paper">
+  <div class="pin"></div>
+  dxctf
+</div>
+
+  <div class="board-header">
+  <div class="category linux">LINUX BASIC</div>
+  <div class="category foren">FORENSIC</div>
+  <div class="category crypto">CRYPTOGRAPHY</div>
+</div>
+
+<div id="intro" class="intro">
+  <div>
+    <h1>FORENSIC CASE FILE</h1>
+    <p id="typing"></p>
+  </div>
+</div>
+
+<div id="popup" class="popup">NEW EVIDENCE FOUND</div>
+
+<svg class="threads" width="100%" height="100%"></svg>
+
+<!-- LINUX -->
+<div id="linux1" class="node unlocked" style="top:18%;left:12%;">
+  <div class="pin"></div>
+  <h3>Training Investigator 1</h3>
+  <a href="/case/linux1"><button>Open Case</button></a>
+</div>
+
+<div id="linux2" class="node locked" style="top:35%;left:24%;">
+  <div class="pin"></div>
+  <h3>Training Investigator 2</h3>
+  <a href="/case/linux2"><button>Open Case</button></a>
+</div>
+
+<div id="linux3" class="node locked" style="top:52%;left:36%;">
+  <div class="pin"></div>
+  <h3>Training Investigator 3</h3>
+  <a href="/case/linux3"><button>Open Case</button></a>
+</div>
+
+<!-- FOREN -->
+<div id="foren1" class="node unlocked" style="top:18%;right:12%;">
+  <div class="pin"></div>
+  <h3>Suspicious Image 1</h3>
+  <a href="/case/foren1"><button>Open Case</button></a>
+</div>
+
+<div id="foren2" class="node locked" style="top:37%;right:26%;">
+  <div class="pin"></div>
+  <h3>Suspicious Image 2</h3>
+  <a href="/case/foren2"><button>Open Case</button></a>
+</div>
+
+<div id="foren3" class="node locked" style="top:56%;right:34%;">
+  <div class="pin"></div>
+  <h3>Suspicious Image 3</h3>
+  <a href="/case/foren3"><button>Open Case</button></a>
+</div>
+
+<!-- CRYPTO -->
+<div id="crypto1" class="node unlocked" style="top:75%;left:25%;">
+  <div class="pin"></div>
+  <h3>Encrypted Message 1</h3>
+  <a href="/case/crypto1"><button>Open Case</button></a>
+</div>
+
+<div id="crypto2" class="node locked" style="top:78%;left:45%;">
+  <div class="pin"></div>
+  <h3>Hidden Email 2</h3>
+  <a href="/case/crypto2"><button>Open Case</button></a>
+</div>
+
+<div id="crypto3" class="node locked" style="top:70%;left:65%;">
+  <div class="pin"></div>
+  <h3>Secret Note 3</h3>
+  <a href="/case/crypto3"><button>Open Case</button></a>
+</div>
+
+</div>
+</div>
+
+<style>
+.board-wrapper{
+  height:100vh;
+  width:100%;
+  overflow:auto;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:#111; /* warna luar */
+}
+
+.board{
+  height:100vh;
+  width:100%;
+  position:relative;
+  font-family:sans-serif;
+  
+  /* IMPORTANT PART */
+  background-image:url("/images/caseboard.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed; /* 🔥 ini kuncinya */
+}
+
+@keyframes idleMove{
+  from{ background-position:center 49%; }
+  to{ background-position:center 51%; }
+}
+
+.node{
+position:absolute;
+width:200px;
+background:#e6d7b9;
+padding:12px;
+border-radius:6px;
+box-shadow:0 6px 10px rgba(0,0,0,.3);
+}
+
+.pin{
+  position:absolute;
+  top:-8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:12px;
+  height:12px;
+  background:#c40000;
+  border-radius:50%;
+  box-shadow:
+    0 0 6px red,
+    inset 0 0 3px #000;
+    z-index:6;
+    animation:pinIdle 2s infinite alternate;
+}
+
+@keyframes pinIdle{
+  from{ transform:translateX(-50%) translateY(0); }
+  to{ transform:translateX(-50%) translateY(1px); }
+}
+
+.node.locked{
+filter:grayscale(1);
+opacity:.5;
+pointer-events:none;
+}
+
+.popup{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#111;
+color:red;
+padding:10px 20px;
+opacity:0;
+}
+
+.popup.show{
+animation:pop 1.6s;
+}
+
+@keyframes pop{
+20%{opacity:1}
+80%{opacity:1}
+}
+
+.intro{
+position:fixed;
+inset:0;
+background:black;
+color:#00ff9f;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+font-family:monospace;
+}
+
+.intro.hide{
+opacity:0;
+pointer-events:none;
+transition:1s;
+}
+
+.threads{
+  position:fixed;   /* ← bukan absolute */
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  pointer-events:none;
+  z-index:5;
+}
+
+/* ===== CINEMATIC CAMERA ===== */
+.board.cinematic{
+  transform:scale(1.08);
+  filter:blur(2px);
+  transition:transform .6s ease, filter .6s ease;
+}
+
+/* ===== DETECTIVE BUTTON ===== */
+.node button{
+  margin-top:8px;
+  width:100%;
+  padding:8px;
+  border:none;
+  background:#2b2b2b;
+  color:#f5e6c8;
+  font-weight:bold;
+  letter-spacing:1px;
+  cursor:pointer;
+  border-radius:4px;
+  box-shadow:0 0 8px rgba(0,0,0,.6);
+  transition:.25s;
+}
+
+.node button:hover{
+  background:#3a3a3a;
+  transform:translateY(-2px);
+}
+
+.node button:active{
+  transform:scale(.96);
+}
+
+/* subtle board movement */
+.board{
+  animation:idleMove 10s infinite alternate;
+}
+
+@keyframes idleMove{
+  from{ background-position:center 48%; }
+  to{ background-position:center 52%; }
+}
+
+#linux1{ transform:rotate(-2deg); }
+#linux2{ transform:rotate(-1deg); }
+#linux3{ transform:rotate(1.5deg); }
+
+#foren1{ transform:rotate(-2deg); }
+#foren2{ transform:rotate(2deg); }
+#foren3{ transform:rotate(-1deg); }
+
+#crypto1{ transform:rotate(-2deg); }
+#crypto2{ transform:rotate(1deg); }
+#crypto3{ transform:rotate(-1.5deg); }
+
+@keyframes threadIdle{
+  0%   { transform:translateY(0px); }
+  50%  { transform:translateY(.6px); }
+  100% { transform:translateY(0px); }
+}
+
+.threads line{
+  animation:threadIdle 3s ease-in-out infinite;
+}
+
+.board-header{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  font-family:monospace;
+}
+
+.brand-paper{
+  position:absolute;
+  top:30px;
+  left:50%;
+  transform:translateX(-50%) rotate(-2deg);
+
+  padding:18px 40px;
+
+  background:
+    linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.08)),
+    url("/images/paper.jpg"); /* optional texture */
+
+  background-color:#d8c39a; /* fallback warna kertas */
+  color:#000000;
+
+  font-size:clamp(32px,5vw,64px);
+  font-weight:900;
+  letter-spacing:10px;
+  text-align:center;
+
+  border-radius:4px;
+
+  box-shadow:
+    0 10px 18px rgba(0,0,0,.45),
+    inset 0 0 8px rgba(0,0,0,.15);
+
+  z-index:7;
+}
+
+.brand-paper .pin{
+  position:absolute;
+  top:-10px;
+  left:50%;
+  transform:translateX(-50%);
+
+  width:14px;
+  height:14px;
+  background:#c40000;
+  border-radius:50%;
+
+  box-shadow:
+    0 0 10px red,
+    inset 0 0 4px #000;
+}
+
+.brand-paper{
+  animation:paperIdle 6s ease-in-out infinite alternate;
+}
+
+@keyframes paperIdle{
+  from{ transform:translateX(-50%) rotate(-2deg); }
+  to{ transform:translateX(-50%) rotate(-1deg); }
+}
+
+.category{
+  position:absolute;
+  color:#f5e6c8;
+  font-size:28px;
+  font-weight:bold;
+  letter-spacing:3px;
+  opacity:.9;
+
+  /* outline */
+  -webkit-text-stroke: .6px #000;
+
+  /* fake shadow depth */
+  text-shadow:
+    2px 2px 0 #000,
+    -2px -2px 0 #000,
+    0 0 6px rgba(0,0,0,.6);
+}
+
+/* posisi label */
+.category.linux{
+  top:8%;
+  left:10%;
+}
+
+.category.foren{
+  top:8%;
+  right:10%;
+}
+
+.category.crypto{
+  bottom:28%;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.category::after{
+  content:"";
+  display:block;
+  margin-top:4px;
+  width:100%;
+  height:2px;
+  background:rgba(255,255,255,.25);
+  box-shadow:0 0 4px black;
+}
+
+
+</style>
+
+<script>
+/* INTRO */
+const intro=document.getElementById("intro");
+
+if(!sessionStorage.getItem("intro_done")){
+  const text="Investigator access granted...";
+  let i=0;
+  const el=document.getElementById("typing");
+
+  function type(){
+    if(i<text.length){
+      el.textContent+=text[i++];
+      setTimeout(type,25);
+    }else{
+      setTimeout(()=>{
+        intro.classList.add("hide");
+      },1000);
+    }
+  }
+  type();
+  sessionStorage.setItem("intro_done","true");
+}else{
+  intro.remove();
+}
+
+/* THREAD */
+function connect(a,b){
+ if(!a||!b)return;
+
+ const svg=document.querySelector(".threads");
+
+ const pin1=a.querySelector(".pin");
+ const pin2=b.querySelector(".pin");
+
+ const r1=pin1.getBoundingClientRect();
+ const r2=pin2.getBoundingClientRect();
+
+ const line=document.createElementNS(
+   "http://www.w3.org/2000/svg","line"
+ );
+
+ const x1=r1.left+r1.width/2;
+ const y1=r1.top+r1.height/2;
+ const x2=r2.left+r2.width/2;
+ const y2=r2.top+r2.height/2;
+
+ line.setAttribute("x1",x1);
+ line.setAttribute("y1",y1);
+
+ // mulai dari titik awal dulu
+ line.setAttribute("x2",x1);
+ line.setAttribute("y2",y1);
+
+ line.setAttribute("stroke","#ff2a2a");
+ line.setAttribute("stroke-width","2");
+ line.style.filter="drop-shadow(0 0 6px red)";
+
+ svg.appendChild(line);
+
+ // 🔥 ANIMASI TARIK BENANG
+ requestAnimationFrame(()=>{
+   line.setAttribute("x2",x2);
+   line.setAttribute("y2",y2);
+   line.style.transition="all .6s ease";
+ });
+}
+
+/* LOAD PROGRESS */
+function unlockIfSolved(id){
+  return localStorage.getItem(id + "_solved");
+}
+
+function loadProgress(){
+
+  const linux1 = document.getElementById("linux1");
+  const linux2 = document.getElementById("linux2");
+  const linux3 = document.getElementById("linux3");
+ 
+  const foren1 = document.getElementById("foren1");
+  const foren2 = document.getElementById("foren2");
+  const foren3 = document.getElementById("foren3");
+
+  const crypto1 = document.getElementById("crypto1");
+  const crypto2 = document.getElementById("crypto2");
+  const crypto3 = document.getElementById("crypto3");
+
+  /* ===== LINUX PATH ===== */
+  if(localStorage.getItem("linux1_solved")){
+    linux2.classList.remove("locked");
+    connect(linux1, linux2);
+  }
+
+  if(localStorage.getItem("linux2_solved")){
+    linux3.classList.remove("locked");
+    connect(linux2, linux3);
+  }
+
+  /* ===== FOREN ===== */
+  if(localStorage.getItem("foren1_solved")){
+    foren2.classList.remove("locked");
+    connect(foren1, foren2);
+  }
+
+  if(localStorage.getItem("foren2_solved")){
+    foren3.classList.remove("locked");
+    connect(foren2, foren3);
+  }
+
+  /* ===== CRYPTO PATH ===== */
+  if(localStorage.getItem("crypto1_solved")){
+    crypto2.classList.remove("locked");
+    connect(crypto1, crypto2);
+  }
+
+  if(localStorage.getItem("crypto2_solved")){
+    crypto3.classList.remove("locked");
+    connect(crypto2, crypto3);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadProgress();
+  cinematicReturn();
+});
+
+function cinematicUnlock(targetId){
+
+  const board=document.querySelector(".board");
+  const popup=document.getElementById("popup");
+  const target=document.getElementById(targetId);
+
+  board.classList.add("cinematic");
+
+  setTimeout(()=>{
+    popup.classList.add("show");
+  },400);
+
+  setTimeout(()=>{
+    board.classList.remove("cinematic");
+    popup.classList.remove("show");
+  },1600);
+}
+
+// zoom
+function cinematicReturn(){
+
+  const lastSolved = localStorage.getItem("last_solved");
+  if(!lastSolved) return;
+
+  const board = document.querySelector(".board");
+
+  board.classList.add("cinematic");
+
+  newEvidence();
+
+  setTimeout(()=>{
+    board.classList.remove("cinematic");
+    localStorage.removeItem("last_solved");
+  },1500);
+  const target=document.getElementById(lastSolved);
+if(target){
+  target.scrollIntoView({
+    behavior:"smooth",
+    block:"center",
+    inline:"center"
+  });
+}
+
+}
+
+/* ===== SAFE VISUAL RESET ===== */
+window.addEventListener("pageshow", () => {
+  const board = document.querySelector(".board");
+  if(board){
+    board.classList.remove("cinematic");
+  }
+});
+
+function newEvidence(){
+  const pop=document.getElementById("popup");
+  pop.classList.add("show");
+  setTimeout(()=>pop.classList.remove("show"),1600);
+}
+
+window.addEventListener("resize", redrawThreads);
+
+function redrawThreads(){
+  const svg=document.querySelector(".threads");
+  svg.innerHTML=""; // hapus semua benang
+  loadProgress();   // gambar ulang sesuai progress
+}
+
+</script>
+
