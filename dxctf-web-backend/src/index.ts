@@ -2,17 +2,12 @@ import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import challenges from "./data/challenges.json";
 
-const port = Number(process.env.PORT) || 3000;
-
 const app = new Elysia()
   .use(cors());
 
-/* GET CHALLENGES */
 app.get("/api/challenges", () => challenges);
 
-/* SUBMIT FLAG */
 app.post("/api/submit", ({ body }) => {
-
   const { challengeId, flag } = body as any;
 
   const chall = challenges.find(
@@ -26,6 +21,9 @@ app.post("/api/submit", ({ body }) => {
   return { success: false };
 });
 
+const port = process.env.PORT || 3000;
+
 app.listen(port);
 
 console.log(`DXCTF backend running on port ${port}`);
+
