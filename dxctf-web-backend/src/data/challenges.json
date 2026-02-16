@@ -1,17 +1,17 @@
 [
   {
     "id": "linux1",
-    "title": "Linux Basic",
+    "title": "Training Investigator 1",
     "flag": "dxctf{hidden_file_found}"
   },
     {
     "id": "linux2",
-    "title": "Linux Strong",
+    "title": "Training Investigator 2",
     "flag": "dxctf{permission_dibuka}"
   },
   {
     "id": "linux3",
-    "title": "Linux Strong",
+    "title": "Training Investigator 3",
     "flag": "dxctf{grep_adalah_senjata}"
   },
   {
