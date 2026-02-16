@@ -8,7 +8,7 @@
     "preview": "bun astro preview"
   },
   "dependencies": {
-    "astro": "^3.9.2"
+    "astro": "latest"
   }
 }
 
