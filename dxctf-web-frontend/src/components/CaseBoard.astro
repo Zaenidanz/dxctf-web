@@ -91,17 +91,17 @@
   width:100%;
   overflow:auto;
 
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding-top:40px;
+  height:100vh;
+  width:100%;
+  overflow:hidden;
+  background:#111;
 
   background:#111; /* warna luar */
 }
 
 .board{
-  width:min(1400px, 95vw);
-  aspect-ratio: 16 / 9;
+  width:100vw;
+  height:100vh;
   position:relative;
   font-family:sans-serif;
   transform-origin: top center;
@@ -110,7 +110,6 @@
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  background-attachment:scroll;
 }
 
 @keyframes idleMove{
