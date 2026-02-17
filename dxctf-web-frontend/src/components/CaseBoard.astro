@@ -89,19 +89,14 @@
 .board-wrapper{
   height:100vh;
   width:100%;
-  overflow:auto;
-
-  height:100vh;
-  width:100%;
   overflow:hidden;
   background:#111;
-
-  background:#111; /* warna luar */
+  position: relative;
 }
 
 .board{
-  width:100vw;
-  height:100vh;
+  width:1400px;
+  height:787.5px;
   position:relative;
   font-family:sans-serif;
   transform-origin: top center;
@@ -110,6 +105,8 @@
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+
+  transform-origin:top left;
 }
 
 @keyframes idleMove{
@@ -572,6 +569,29 @@ function redrawThreads(){
   svg.innerHTML=""; // hapus semua benang
   loadProgress();   // gambar ulang sesuai progress
 }
+
+// AUTO SCALE
+function scaleBoard(){
+  const board = document.querySelector(".board");
+
+  const scaleX = window.innerWidth / 1400;
+  const scaleY = window.innerHeight / 787.5;
+
+  const scale = Math.min(scaleX, scaleY);
+
+  board.style.transform = `scale(${scale})`;
+
+  board.style.left =
+    (window.innerWidth - 1400 * scale)/2 + "px";
+
+  board.style.top =
+    (window.innerHeight - 787.5 * scale)/2 + "px";
+
+  board.style.position = "absolute";
+}
+
+window.addEventListener("resize", scaleBoard);
+window.addEventListener("load", scaleBoard);
 
 </script>
 
