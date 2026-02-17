@@ -99,7 +99,6 @@
   height:787.5px;
   position:relative;
   font-family:sans-serif;
-  transform-origin: top center;
   /* IMPORTANT PART */
   background-image:url("/images/caseboard.png");
   background-size:cover;
@@ -115,12 +114,19 @@
 }
 
 .node{
-position:absolute;
-width:200px;
-background:#e6d7b9;
-padding:12px;
-border-radius:6px;
-box-shadow:0 6px 10px rgba(0,0,0,.3);
+ position:absolute;
+ width:clamp(160px,14vw,200px);
+ background:#e6d7b9;
+ padding:12px;
+ border-radius:6px;
+ box-shadow:0 6px 10px rgba(0,0,0,.3);
+ z-index:6;
+}
+
+.node h3{
+  margin:0;
+  word-break:break-word;
+  line-height:1.2;
 }
 
 .pin{
@@ -241,6 +247,13 @@ transition:1s;
   to{ background-position:center 52%; }
 }
 
+@media (max-width:1100px){
+  .board{
+    animation:none;
+    background-position:center;
+  }
+}
+
 #linux1{ transform:rotate(-2deg); }
 #linux2{ transform:rotate(-1deg); }
 #linux3{ transform:rotate(1.5deg); }
@@ -340,6 +353,8 @@ transition:1s;
     2px 2px 0 #000,
     -2px -2px 0 #000,
     0 0 6px rgba(0,0,0,.6);
+
+  z-index:8;
 }
 
 /* posisi label */
@@ -417,11 +432,13 @@ function connect(a,b){
    "http://www.w3.org/2000/svg","line"
  );
 
- const x1 = r1.left - boardRect.left + r1.width/2;
- const y1 = r1.top  - boardRect.top  + r1.height/2;
+ const s = window.boardScale || 1;
 
- const x2 = r2.left - boardRect.left + r2.width/2;
- const y2 = r2.top  - boardRect.top  + r2.height/2;
+ const x1 = (r1.left - boardRect.left + r1.width/2) / s;
+ const y1 = (r1.top  - boardRect.top  + r1.height/2) / s;
+
+ const x2 = (r2.left - boardRect.left + r2.width/2) / s;
+ const y2 = (r2.top  - boardRect.top  + r2.height/2) / s;
 
 
  line.setAttribute("x1",x1);
@@ -578,6 +595,7 @@ function scaleBoard(){
   const scaleY = window.innerHeight / 787.5;
 
   const scale = Math.min(scaleX, scaleY);
+  window.boardScale = scale;
 
   board.style.transform = `scale(${scale})`;
 
@@ -592,6 +610,11 @@ function scaleBoard(){
 
 window.addEventListener("resize", scaleBoard);
 window.addEventListener("load", scaleBoard);
+
+window.addEventListener("load", () => {
+  scaleBoard();
+  redrawThreads();
+});
 
 </script>
 
